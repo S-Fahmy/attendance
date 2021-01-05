@@ -3,6 +3,7 @@ import urllib, sys
 from models import Employee, Attendance, insert_bulk, db
 from datetime import datetime
 from flask import abort
+import os
 
 '''
 A reminder not to be confused in the future:
@@ -12,10 +13,14 @@ the ztecko app use the badge number as the id when showing emps in reports but b
 '''
 
 def connect_to_machine_access_db():
+    root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    importedDbname = 'att2000.mdb' #when its imported manually from the ztecko app.
+    dbPath =  os.path.join(root_path, importedDbname)
+
     try:
         connection_string = (
             r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-            r'DBQ=C:\Users\sf\attendance\att2000.mdb;'
+            r'DBQ='+ dbPath +';'
             r'ExtendedAnsiSQL=1;'
         )
 
