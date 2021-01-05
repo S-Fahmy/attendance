@@ -13,19 +13,16 @@ db = SQLAlchemy()
 
 
 def setup_db(app):
-
     db.app = app
     db.init_app(app)
     Migrate(app, db, compare_type=True)
 
 
+#assign the test db uri
 def setup_test_db(app):
     app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://{}:{}@{}/{}".format(
         'postgres', 'root', 'localhost: 5432', 'attendance_test')
-    db.app = app
-    db.init_app(app)
-    Migrate(app, db)
-    return db
+   
 
 
 '''

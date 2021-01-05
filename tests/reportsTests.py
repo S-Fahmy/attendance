@@ -2,8 +2,8 @@ import sys
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
-from app import create_app
 
+from app import app
 
 from models import setup_test_db, db, Employee, Attendance, Schedule
 from controllers.mdbcontroller import connect_to_machine_access_db
@@ -14,7 +14,7 @@ class mdbTestCase(unittest.TestCase):
 
     def setUp(self):
         """Define test variables and initialize app."""
-        self.app = create_app()
+        self.app = app
         self.client = self.app.test_client
         self.db = setup_test_db(self.app)
 
