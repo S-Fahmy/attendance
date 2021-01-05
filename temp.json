@@ -1,0 +1,158 @@
+{
+"Report": {
+        "schedule_name": "name",
+        "start_date": "date",
+        "end_date": "date",
+        "attendances_days_count": 20,
+        "shift_begins":"09:30",
+        "shift_ends": "16:30",
+        "shift_total_time": "7 hrs",
+        "overtime": 120,
+        "undertime": 0,
+        "days_absent": 3,
+
+        "arrival_total": "check_in_calculation_total",
+        "leave_total": "check_out_calculation_total",
+        "daily_attendances": [
+            {
+                "id": "self.id",
+                "day": "str(self.day)",
+                "checkin": "checkin",
+                "checkout": "self.checkout",
+                "user_id": "self.user_id",
+
+                "checkin_status": "check status",
+                "check_in_schedule_calculated": "check_in_calculation",
+                "checkout_status": "check status",
+                "checkout_schedule_calculated": "checkout_calculation",
+                "total_attendance_time": "total att",
+
+                "absent": false
+            }
+        ],
+
+        "holidays":[
+            {
+                "name":"eid",
+                "date": "1/1/1"
+            }
+        ]
+    }
+}
+
+
+
+
+{
+
+    "daily_attendances": 
+        {
+     
+            "day": "str(self.day)",
+            "user_id": "self.user_id",
+            "absent": true,
+            "absence_reason": "unexcused absence"
+        }
+    
+
+}
+
+
+
+{
+ "kind": "calendar#events",
+ "etag": "\"p320d3btdhbeuq0g\"",
+ "summary": "tiito5420@gmail.com",
+ "updated": "2020-12-20T17:26:51.728Z",
+ "timeZone": "Africa/Cairo",
+ "accessRole": "owner",
+ "defaultReminders": [
+  {
+   "method": "popup",
+   "minutes": 30
+  }
+ ],
+ "nextSyncToken": "CIDRr62K3e0CEIDRr62K3e0CGAU=",
+ "items": [
+  {
+   "kind": "calendar#event",
+   "etag": "\"3214947262892000\"",
+   "id": "0b7pkci04skt9t5fg6vm5n6kn5",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MGI3cGtjaTA0c2t0OXQ1Zmc2dm01bjZrbjUgdGlpdG81NDIwQG0",
+   "created": "2020-12-09T00:27:11.000Z",
+   "updated": "2020-12-09T00:27:11.446Z",
+   "summary": "Build a CV & Write a Cover Letter",
+   "location": "Live webinar",
+   "creator": {
+    "email": "tiito5420@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "tiito5420@gmail.com",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2020-12-11T15:30:00+02:00"
+   },
+   "end": {
+    "dateTime": "2020-12-11T16:30:00+02:00"
+   },
+   "iCalUID": "0b7pkci04skt9t5fg6vm5n6kn5@google.com",
+   "sequence": 0,
+   "hangoutLink": "https://meet.google.com/rhk-gxki-hbi",
+   "conferenceData": {
+    "entryPoints": [
+     {
+      "entryPointType": "video",
+      "uri": "https://meet.google.com/rhk-gxki-hbi",
+      "label": "meet.google.com/rhk-gxki-hbi"
+     }
+    ],
+    "conferenceSolution": {
+     "key": {
+      "type": "hangoutsMeet"
+     },
+     "name": "Google Meet",
+     "iconUri": "https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v6/web-512dp/logo_meet_2020q4_color_2x_web_512dp.png"
+    },
+    "conferenceId": "rhk-gxki-hbi",
+    "signature": "AL9oL6UmTt9ifssssa8U4gZp5Yzj"
+   },
+   "reminders": {
+    "useDefault": true
+   }
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3216133371708000\"",
+   "id": "4in7fd3q782a4v29ek2g226tdb",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=NGluN2ZkM3E3ODJhNHYyOWVrMmcyMjZ0ZGIgdGlpdG81NDIwQG0",
+   "created": "2020-12-15T21:11:25.000Z",
+   "updated": "2020-12-15T21:11:25.854Z",
+   "summary": "AWS Solution Architect Arabic Course",
+   "description": "AWS Solution Architect Arabic Course",
+   "location": "TBD",
+   "creator": {
+    "email": "tiito5420@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "tiito5420@gmail.com",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2021-01-09T18:30:00+02:00"
+   },
+   "end": {
+    "dateTime": "2021-01-09T21:30:00+02:00"
+   },
+   "iCalUID": "4in7fd3q782a4v29ek2g226tdb@google.com",
+   "sequence": 0,
+   "reminders": {
+    "useDefault": true
+   }
+  }
+ ]
+}
