@@ -2,7 +2,7 @@ import sys
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
-from flaskr import create_app
+from app import create_app
 
 
 from models import setup_test_db, db, Employee, Attendance, Schedule
