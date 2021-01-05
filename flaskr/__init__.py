@@ -270,9 +270,7 @@ def create_app(test_config=None):
 
     @app.route('/schedules', methods=['PATCH'])
     def edit_schedule():
-        print("not even!!")
         schedule_form = request.get_json()['data']
-        print(schedule_form)
         validate_schedule_form(schedule_form)
 
         schedule = Schedule.query.get(schedule_form['id'])
@@ -300,7 +298,6 @@ def create_app(test_config=None):
     @app.route('/schedule/<int:id>', methods=['GET'])
     def get_schedule(id):
         schedule = Schedule.query.get(id)
-        print(schedule)
         abort_if_none(schedule)
 
         return jsonify({

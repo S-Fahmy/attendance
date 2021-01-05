@@ -4,18 +4,13 @@ from datetime import datetime, timedelta
 def get_time_from_string(time_string):
     try:
         if time_string.count(':') == 1:
-            print('YES YA KOS OMAK ' + time_string)
-            print(time_string.count(':'))
             time = datetime.strptime(time_string, '%H:%M').time()
         else:
-            print("NO YA KOS OMEN OMAK")
             time = datetime.strptime(time_string, '%H:%M:%S').time()
 
     except Exception as e:
-        print("KOSOMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAK")
         print(e)
 
-    print(time)
     return time
 
 def get_time_with_seconds_from_string(time_string):
@@ -58,7 +53,6 @@ def get_date_from_string_mdy(date):
     try:
         time = datetime.strptime(date, '%m-%d-%Y')
     except Exception as e:
-        print('im here')
         print(e)
     return time
 
@@ -67,7 +61,6 @@ def get_date_from_string_ymd(date):
     try:
         time = datetime.strptime(date, '%Y-%m-%d')
     except Exception as e:
-        print('im here')
         print(e)
     return time
 '''
