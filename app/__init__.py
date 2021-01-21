@@ -286,7 +286,7 @@ def edit_schedule():
 
 @app.route('/schedules', methods=['GET'])
 def get_schedules():
-    #TODO: create an schedules and employees join query later if this ever gets big.
+    #TODO: create an schedules and employees join query later.
     schedules = Schedule.query.all()
     abort_if_none(schedules)
 
