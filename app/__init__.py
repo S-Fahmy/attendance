@@ -1,12 +1,18 @@
-from flask import Flask, abort, jsonify, request
+from six.moves.urllib.request import urlopen
+from functools import wraps
+
+from flask import Flask, abort, jsonify, request, _request_ctx_stack
 from models import setup_db, Employee, Attendance, Schedule, Holiday, insert_bulk, db
 from controllers.mdbcontroller import import_employees_from_access_db, import_attendances_from_access_db
 from controllers.timeUtils import *
 from controllers.Reports import *
 from datetime import datetime
 from controllers.holidaysSync import syncHolidaysDb
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+from jose import jwt
 import sys
+from auth.auth import AuthError, requires_auth
+
 
 
 # def create_app(test_config=None):
@@ -16,6 +22,13 @@ app.config.from_object('config')
 setup_db(app)
 CORS(app)
 
+# Error handler
+
+@app.errorhandler(AuthError)
+def handle_auth_error(ex):
+    response = jsonify(ex.error)
+    response.status_code = ex.status_code
+    return response
 
     # CORS Headers
 
@@ -51,6 +64,7 @@ def import_employees():
     }), 200
 
 @app.route('/employees')
+@requires_auth
 def get_employees():
     try:
         employees = Employee.query.all()
@@ -65,6 +79,7 @@ def get_employees():
     })
 
 @app.route('/employees/<int:id>')
+@requires_auth
 def get_employee_by_id(id):
     try:
         employee = Employee.query.get(id)
@@ -79,6 +94,7 @@ def get_employee_by_id(id):
     })
 
 @app.route('/attendances-importer')
+@requires_auth
 def import_attendances():
     try:
         imported_attens_count = import_attendances_from_access_db()
@@ -98,6 +114,7 @@ def import_attendances():
 
 '''
 @app.route('/attendances')
+@requires_auth
 def get_attendances():
     try:
 
@@ -159,6 +176,7 @@ def get_attendances():
     date format is month-day-year
 '''
 @app.route('/employees/<int:employee_id>/attendances')
+@requires_auth
 def get_employee_attendances(employee_id):
     # try:
 
@@ -217,6 +235,7 @@ def get_employee_attendances(employee_id):
     }), 200
 
 @app.route('/attendances/count')
+@requires_auth
 def get_attendances_count():
 
     try:
@@ -243,6 +262,7 @@ def abort_if_none(result):
         
 
 @app.route('/schedules', methods=["POST"])
+@requires_auth
 def add_schedule():
     schedule_form = request.get_json()
     
@@ -259,6 +279,7 @@ def add_schedule():
     })
 
 @app.route('/schedules/<int:id>', methods=['DELETE'])
+@requires_auth
 def delete_schedule(id):
     schedule = Schedule.query.get(id)
     if schedule == None:
@@ -269,6 +290,7 @@ def delete_schedule(id):
     return jsonify({"success": True})
 
 @app.route('/schedules', methods=['PATCH'])
+@requires_auth
 def edit_schedule():
     schedule_form = request.get_json()['data']
     validate_schedule_form(schedule_form)
@@ -285,6 +307,7 @@ def edit_schedule():
     })
 
 @app.route('/schedules', methods=['GET'])
+@requires_auth
 def get_schedules():
     #TODO: create an schedules and employees join query later.
     schedules = Schedule.query.all()
@@ -296,6 +319,7 @@ def get_schedules():
     })
 
 @app.route('/schedule/<int:id>', methods=['GET'])
+@requires_auth
 def get_schedule(id):
     schedule = Schedule.query.get(id)
     abort_if_none(schedule)
@@ -306,6 +330,7 @@ def get_schedule(id):
     })
 
 @app.route('/holidays', methods=['POST'])
+@requires_auth
 def resync_holidays_by_year():
     year = request.get_json()['year']
 
@@ -324,6 +349,7 @@ def resync_holidays_by_year():
     
     
 @app.route('/holidays', methods=['GET'])
+@requires_auth
 def get_holidays():
     holidays = Holiday.query.all()
     abort_if_none(holidays)
@@ -333,6 +359,7 @@ def get_holidays():
     })
     
 @app.route('/holidays/<int:id>', methods=['PATCH'])
+@requires_auth
 def edit_holiday(id):
     holiday = Holiday.query.get(id)
     abort_if_none(holiday)

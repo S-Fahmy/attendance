@@ -13,4 +13,5 @@ DEBUG = True
 local_uri = 'postgresql://postgres:root@localhost:5432/attendance_test'
 
 SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+# SQLALCHEMY_DATABASE_URI = local_uri
 SQLALCHEMY_TRACK_MODIFICATIONS = False
